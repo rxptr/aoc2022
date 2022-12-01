@@ -1,15 +1,22 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
-    }
 
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
+    val emptyLine = "\n\n"
+    val emptySpace = "\n"
 
-    // test if implementation meets criteria from the description, like:
+    fun sliceInputToListOfInts(input: String): List<List<Int>> =
+        input.split(emptyLine)
+            .map { it.split(emptySpace) }
+            .map { stringList -> stringList.filter { it.isNotBlank() }.map { it.toInt() } }
+
+    fun sumOfCalories(input: String): List<Int> = sliceInputToListOfInts(input).map { it.sum() }
+
+    fun part1(input: String): Int = sumOfCalories(input).max()
+
+    fun part2(input: String): Int = sumOfCalories(input).sortedDescending().subList(0, 3).sum()
+
     val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
+    check(part1(testInput) == 24000)
+    check(part2(testInput) == 45000)
 
     val input = readInput("Day01")
     println(part1(input))
