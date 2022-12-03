@@ -8,6 +8,9 @@ import java.security.MessageDigest
 fun readInputLines(name: String) = File("src", "$name.txt")
     .readLines()
 
+/**
+ * Reads from the given input txt file.
+ */
 fun readInput(name: String) = File("src", "$name.txt").readText()
 
 /**
