@@ -1,6 +1,6 @@
 fun main() {
 
-    fun parsInput(input: List<String>) = input.map {
+    fun parsInput(inputLines: List<String>) = inputLines.map {
         it.split(',').map { id ->
             id.split('-')
                 .let { (a, b) -> a.toInt() .. b.toInt() }

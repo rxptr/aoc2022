@@ -6,22 +6,22 @@ fun main() {
 
     fun part1(input: List<String>): Int {
         val pairs = input.map {
-            val middle = it.length / 2
-            Pair(it.substring(0, middle), it.substring(middle, it.length))
+            val (a, b) = it.chunked(it.length / 2)
+            Pair(a.toSet(), b.toSet())
         }
         val duplicates = pairs.map {
-            (it.first.toSet() intersect it.second.toSet()).first()
+            (it.first intersect it.second).first()
         }
         return mapPriorities(duplicates).sum()
     }
 
     fun part2(input: List<String>): Int {
-        val groups = input.chunked(3)
-        val common = groups.map { tuple ->
-            tuple.map { it.toSet() }
-        }.map {
-            (it[0] intersect it[1] intersect it[2]).first()
-        }
+        val common = input.chunked(3)
+            .map { tuple ->
+                tuple.map { it.toSet() }
+            }.map { (a, b, c) ->
+                (a intersect b intersect c).first()
+            }
         return mapPriorities(common).sum()
     }
 
