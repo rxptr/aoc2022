@@ -1,27 +1,20 @@
 fun main() {
 
-    fun mapPriorities(chars: List<Char>) = chars.map {
-        if (it.isLowerCase()) it.code - 96 else it.code - 38
-    }
+    fun mapPriorities(chars: List<Char>) = chars.map { if (it.isLowerCase()) it.code - 96 else it.code - 38 }
 
     fun part1(input: List<String>): Int {
         val pairs = input.map {
             val (a, b) = it.chunked(it.length / 2)
             Pair(a.toSet(), b.toSet())
         }
-        val duplicates = pairs.map {
-            (it.first intersect it.second).first()
-        }
+        val duplicates = pairs.map { (it.first intersect it.second).first() }
         return mapPriorities(duplicates).sum()
     }
 
     fun part2(input: List<String>): Int {
         val common = input.chunked(3)
-            .map { tuple ->
-                tuple.map { it.toSet() }
-            }.map { (a, b, c) ->
-                (a intersect b intersect c).first()
-            }
+            .map { it.map(CharSequence::toSet) }
+            .map { (a, b, c) -> (a intersect b intersect c).first() }
         return mapPriorities(common).sum()
     }
 
